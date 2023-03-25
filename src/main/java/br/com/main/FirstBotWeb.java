@@ -34,7 +34,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
             // Uncomment to set the WebDriver path
             //setDriverPath("C://");
-            int cont;
+            int contInputs, contSelects, contLabels, contTotal;
             
             String fileName = "D:\\Users\\cblna\\Documents\\Paulo\\github\\urls.txt";
             
@@ -55,14 +55,16 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 	                
 	                System.out.println("Processando a página");
 	                
-	                cont = listInputs();
+	                contInputs = listInputs();
 	                
-	                cont = listSelects();
+	                contSelects = listSelects();
 	                
-	                cont = listLabels();
+	                contLabels = listLabels();
+	                
+	                contTotal = contInputs+ contLabels+ contSelects;
 	                
 	                System.out.println("End execute url : " + url);
-	                System.out.println("Total de elementos encontrados : " + cont);
+	                System.out.println("Total de elementos encontrados : " + contTotal);
 	                
             	}
             	
