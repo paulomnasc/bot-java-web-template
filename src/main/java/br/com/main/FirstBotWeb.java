@@ -109,7 +109,8 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		
 		if(element.getAttribute("name")==null) return element.getAttribute("id");
 		
-		if(element.getAttribute("name").isBlank()) return element.getAttribute("id");
+		if(element.getAttribute("name").isBlank()) return element.getTagName();
+		//if(element.getAttribute("name").isBlank()) return element.getAttribute("id");
 		
 		return element.getAttribute("name");
 	}
