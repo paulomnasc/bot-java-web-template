@@ -34,24 +34,40 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
             // Uncomment to set the WebDriver path
             //setDriverPath("C://");
-
-            // Opens the BotCity website
-            String url = "";
-            //browse("https://botcity.dev");
-            url = "https://sicg.homologacao.iphan.gov.br/sicg/login";
-            //url = "https://sicg.homologacao.iphan.gov.br/sicg/bens/pesquisaBem";
-            //browse(url);
-            navigateTo(url);
+            int cont;
             
+            String fileName = "D:\\Users\\cblna\\Documents\\Paulo\\github\\urls.txt";
             
+            ReadTextFile reader = new ReadTextFile();
+            List<String> urls = reader.readFile(fileName);
             
-            int cont = 0; 
-            System.out.println("Processando a página");
-            cont = listInputs();
-            cont = 0;
-            cont = listSelects();
+            for (String url : urls)
+            {
+            	
+            	if(!url.startsWith("*"))
+            	{
+            	
+	            	System.out.println("Navigate to Url : " + url);
+	            	
+	            	navigateTo(url);
+	            	
+	            	
+	                
+	                System.out.println("Processando a página");
+	                
+	                cont = listInputs();
+	                
+	                cont = listSelects();
+	                
+	                cont = listLabels();
+	                
+	                System.out.println("End execute url : " + url);
+	                System.out.println("Total de elementos encontrados : " + cont);
+	                
+            	}
+            	
+            }
             
-            System.out.println("Total de elementos encontrados : " + cont);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,12 +75,43 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
         	
         	System.out.println("FIM do Processo !!!");
             // Stop the browser and clean up
-            //stopBrowser();
+            stopBrowser();
             
             
         }
     }
 
+    
+    private int listLabels() {
+		int cont;
+		cont = 0;
+		
+		List<WebElement> labelElements = this.findElements(By.tagName("label"));
+		
+		for (WebElement element : labelElements) {
+			System.out.println("Lista rótulos :" + extractedAttribute(element));
+		    cont++;
+		}
+		
+		List<WebElement> legendElements = this.findElements(By.tagName("legend"));
+		
+		for (WebElement element : legendElements) {
+			System.out.println("Lista rótulos :" + extractedAttribute(element));
+		    cont++;
+		}
+		
+		return cont;
+	}
+
+	private String extractedAttribute(WebElement element) {
+		
+		if(element.getAttribute("name")==null) return element.getAttribute("id");
+		
+		if(element.getAttribute("name").isBlank()) return element.getAttribute("id");
+		
+		return element.getAttribute("name");
+	}
+    
 	private int listSelects() {
 		int cont;
 		cont = 0;
@@ -72,7 +119,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> selectElements = this.findElements(By.tagName("select"));
 		
 		for (WebElement element : selectElements) {
-			System.out.println("Lista :" + element.getAttribute("name"));
+			System.out.println("Listas suspensas:" + extractedAttribute(element));
 		    cont++;
 		}
 		return cont;
@@ -84,8 +131,9 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> inputElements = this.findElements(By.tagName("input"));
 		
 		for (WebElement element : inputElements) {
-		    System.out.println("Caixa Texto ou Botão :" + element.getAttribute("name"));
-		    String atributo = element.getAttribute("name");
+		    System.out.println("Caixa Texto ou Botão :" + extractedAttribute(element));
+		    cont++;
+		    String atributo = extractedAttribute(element);
 		    if(atributo.contains("login"))
 		    {
 		    	element.sendKeys("teste.sistemas");
@@ -98,7 +146,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		    	form.submit();
 		    	
 		    }
-		    cont++;
+		    
 		}
 		
 		return cont;
