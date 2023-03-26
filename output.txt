@@ -10,6 +10,7 @@ Total de Rótulos: 0
 Total de Listas Suspensas: 0
 Total de Iamgens Clicáveis: 0
 Total de Ações Clicáveis: 0
+Total de Mapas na Página: 0
 ***************************************************************************
 End execute url : https://sicg.homologacao.iphan.gov.br/sicg/login
 ***************************************************************************
@@ -52,12 +53,29 @@ Listas suspensas:municipio
 Listas suspensas:pesquisa.idTipoLogradouro
 Total de Listas Suspensas: 8
 Total de Iamgens Clicáveis: 0
-Ações :  :Adicionar
-Ações :  :action
 Ações :  :Nova Pesquisa
 Ações :  :Pesquisa
-Total de Ações Clicáveis: 4
+Total de Ações Clicáveis: 2
+Ações :  :mapa
+Total de Mapas na Página: 1
 ***************************************************************************
 End execute url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
+***************************************************************************
+Navigate to Url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisarBem
+***************************************************************************
+Processando a página https://sicg.homologacao.iphan.gov.br/sicg/pesquisarBem
+***************************************************************************
+Total de Inputs: 0
+Total de Rótulos: 0
+Listas suspensas:pesquisaBemVO.filtro
+Listas suspensas:pesquisaBemVO.subFiltro
+Listas suspensas:pesquisaBemVO.siglaUf
+Total de Listas Suspensas: 3
+Total de Iamgens Clicáveis: 0
+Total de Ações Clicáveis: 0
+Ações :  :mapa
+Total de Mapas na Página: 1
+***************************************************************************
+End execute url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisarBem
 ***************************************************************************
 FIM do Processo !!!

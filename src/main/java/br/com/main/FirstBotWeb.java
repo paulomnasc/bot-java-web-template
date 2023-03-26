@@ -39,7 +39,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
             // Uncomment to set the WebDriver path
             //setDriverPath("C://");
-            int contInputs, contSelects, contLabels, contImages, contAcoes, contTotal;
+            int contInputs, contSelects, contLabels, contImages, contAcoes, contMaps, contTotal;
             contSelects = 0;
             String fileName = "D:\\Users\\cblna\\Documents\\Paulo\\github\\urls.txt";
             
@@ -77,6 +77,9 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 	                log.write("Total de Ações Clicáveis: " + contAcoes);
 
 	                
+	                contMaps = listMaps();
+	                log.write("Total de Mapas na Página: " + contMaps);
+	                
 	        		
 	                log.write("***************************************************************************");
 	                log.write("End execute url : " + url);
@@ -101,19 +104,51 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
         }
     }
     
-    private int listActions() {
+    
+    private int listMaps() {
 		int contTotal;
 		//Obtendo ações 
 		int cont;
 		cont = 0;
 		
-		String expression = "//button[@class='iPhanbutton']";
+		String expression = "//div[@id='mapa']";
 		List<WebElement> lista =this.findElements(By.xpath(expression));
 		//List<WebElement> lista =this.findElements(By.tagName("button"));
 		for (WebElement element : lista) {
 			log.write("Ações :  :" + extractedAttribute(element));
 		    cont++;
 		}
+		contTotal = cont;
+		return contTotal;
+	}
+    
+    private int listActions() {
+		int contTotal;
+		//Obtendo ações 
+		int cont;
+		cont = 0;
+		
+		//String expression = "//button[@class='iPhanbutton']";
+		//List<WebElement> lista =this.findElements(By.tagName("button"));		
+		//String expression = "//div/button[contains(@type,'button')]";
+		String expression = "//div/button[contains(@class,'button')]";
+		List<WebElement> lista =this.findElements(By.xpath(expression));
+
+		for (WebElement element : lista) {
+			log.write("Ações :  :" + extractedAttribute(element));
+		    cont++;
+		}
+		
+		
+		String expression2 = "//div/button[contains(@role,'button')]";
+		List<WebElement> lista2 =this.findElements(By.xpath(expression2));
+
+		for (WebElement element : lista2) {
+			log.write("Ações :  :" + extractedAttribute(element));
+		    cont++;
+		}
+
+		
 		contTotal = cont;
 		return contTotal;
 	}
@@ -198,12 +233,20 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		int cont;
 		cont = 0;
 		
-		List<WebElement> selectElements = this.findElements(By.tagName("select"));
+		List<WebElement> selectElements = this.findElements(By.xpath("//select"));
 		
 		for (WebElement element : selectElements) {
 			log.write("Listas suspensas:" + extractedAttribute(element));
 		    cont++;
 		}
+		
+		List<WebElement> selectElements2 = this.findElements(By.xpath("//div/select[contains(@name,'pesquisaBem')]"));
+		
+		for (WebElement element : selectElements2) {
+			log.write("Listas suspensas:" + extractedAttribute(element));
+		    cont++;
+		}
+		
 		return cont;
 	}
 

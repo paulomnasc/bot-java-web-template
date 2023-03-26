@@ -1,3 +1,4 @@
 https://sicg.homologacao.iphan.gov.br/sicg/login
 *https://sicg.homologacao.iphan.gov.br/sicg/bens/pesquisaBem
 https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
+https://sicg.homologacao.iphan.gov.br/sicg/pesquisarBem
