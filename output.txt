@@ -1,0 +1,57 @@
+START PROCESS
+Navigate to Url : https://sicg.homologacao.iphan.gov.br/sicg/login
+***************************************************************************
+Processando a página https://sicg.homologacao.iphan.gov.br/sicg/login
+***************************************************************************
+Caixa Texto ou Botão :usuario.dadosUsuario.login
+Caixa Texto ou Botão :usuario.dadosUsuario.senha
+Total de Inputs: 2
+Total de Rótulos: 0
+Total de Listas Suspensas: 0
+Total de Iamgens ou Botões Clicáveis: 0
+***************************************************************************
+End execute url : https://sicg.homologacao.iphan.gov.br/sicg/login
+***************************************************************************
+Navigate to Url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
+***************************************************************************
+Processando a página https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
+***************************************************************************
+Total de Inputs: 0
+Rótulo:  :Natureza:
+Rótulo:  :Tipo:
+Rótulo:  :Classificação:
+Rótulo:  :Classificação - 2º nível:
+Rótulo:  :Grupo:
+Rótulo:  :Propriedade:
+Rótulo:  :Uso do solo:
+Rótulo:  :Entorno:
+Rótulo:  :Estado de conservação:
+Rótulo:  :Estado de preservação:
+Rótulo:  :Nome do bem:
+Rótulo:  :Tipo:
+Rótulo:  :Natureza administrativa:
+Rótulo:  :Condição:
+Rótulo:  :Recorte temático:
+Rótulo:  :Recorte geográfico:
+Rótulo:  :UF:
+Rótulo:  :Município:
+Rótulo:  :Tipo Logradouro:
+Rótulo:  :Logradouro:
+Rótulo:  :Número:
+Rótulo:  :CEP:
+Rótulo:  :Buffer:
+Total de Rótulos: 23
+Listas suspensas:tipoProtecao
+Listas suspensas:naturezaAdm
+Listas suspensas:condicao
+Listas suspensas:pesquisa.recorteTematico
+Listas suspensas:pesquisa.recorteGeografico
+Listas suspensas:uf
+Listas suspensas:municipio
+Listas suspensas:pesquisa.idTipoLogradouro
+Total de Listas Suspensas: 8
+Total de Iamgens ou Botões Clicáveis: 0
+***************************************************************************
+End execute url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
+***************************************************************************
+FIM do Processo !!!
