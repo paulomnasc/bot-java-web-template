@@ -15,9 +15,13 @@ import dev.botcity.maestro_sdk.runner.BotExecution;
 import dev.botcity.maestro_sdk.runner.RunnableAgent;
 
 public class FirstBotWeb extends WebBot implements RunnableAgent {
-    public FirstBotWeb() {
+    
+	private WriteToFile log;
+	
+	public FirstBotWeb() {
         try {
             setClassLoader(this.getClass().getClassLoader());
+            log = new WriteToFile();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,32 +52,32 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
             	if(!url.startsWith("*"))
             	{
             	
-	            	System.out.println("Navigate to Url : " + url);
+	            	log.write("Navigate to Url : " + url);
 	            	
 	            	navigateTo(url);
 	            	
 	            	
-	            	System.out.println("***************************************************************************");
-	                System.out.println("Processando a página " + url);
-	                System.out.println("***************************************************************************");
+	            	log.write("***************************************************************************");
+	            	log.write("Processando a página " + url);
+	            	log.write("***************************************************************************");
 	                
 	                contInputs = listInputs();
-	                System.out.println("Total de Inputs: " + contInputs);
+	                log.write("Total de Inputs: " + contInputs);
 	                
 	                contLabels = listLabels();
-	                System.out.println("Total de Rótulos: " + contLabels);
+	                log.write("Total de Rótulos: " + contLabels);
 	                
 	                contSelects = listSelects();
-	                System.out.println("Total de Listas Suspensas: " + contSelects);
+	                log.write("Total de Listas Suspensas: " + contSelects);
 	                
 	                contImages = listImages();
-	                System.out.println("Total de Iamgens ou Botões Clicáveis: " + contImages);
+	                log.write("Total de Iamgens ou Botões Clicáveis: " + contImages);
 
 	                
 	        		
-	                System.out.println("***************************************************************************");
-	                System.out.println("End execute url : " + url);
-	                System.out.println("***************************************************************************");
+	                log.write("***************************************************************************");
+	                log.write("End execute url : " + url);
+	                log.write("***************************************************************************");
 	                
 	                
             	}
@@ -85,7 +89,8 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
             e.printStackTrace();
         } finally {
         	
-        	System.out.println("FIM do Processo !!!");
+        	log.write("FIM do Processo !!!");
+        	log.close();
             // Stop the browser and clean up
             stopBrowser();
             
@@ -104,7 +109,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> labelEements =this.findElements(By.xpath(expression));
 			        		
 		for (WebElement element : labelEements) {
-			System.out.println("Rótulo:  :" + extractedAttribute(element));
+			log.write("Rótulo:  :" + extractedAttribute(element));
 			
 		    cont++;
 		}
@@ -120,7 +125,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> imageElements = this.findElements(By.tagName("img"));
 		
 		for (WebElement element : imageElements) {
-			System.out.println("Lista rótulos :" + extractedAttribute(element));
+			log.write("Lista rótulos :" + extractedAttribute(element));
 		    cont++;
 		}
 		
@@ -139,14 +144,14 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> labelElements = elementContainer.findElements(By.tagName("label"));
 		
 		for (WebElement element : labelElements) {
-			System.out.println("Lista rótulos :" + extractedAttribute(element));
+			log.write("Lista rótulos :" + extractedAttribute(element));
 		    cont++;
 		}
 		
 		List<WebElement> legendElements = this.findElements(By.tagName("legend"));
 		
 		for (WebElement element : legendElements) {
-			System.out.println("Lista rótulos :" + extractedAttribute(element));
+			log.write("Lista rótulos :" + extractedAttribute(element));
 		    cont++;
 		}
 		
@@ -176,7 +181,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		List<WebElement> selectElements = this.findElements(By.tagName("select"));
 		
 		for (WebElement element : selectElements) {
-			System.out.println("Listas suspensas:" + extractedAttribute(element));
+			log.write("Listas suspensas:" + extractedAttribute(element));
 		    cont++;
 		}
 		return cont;
@@ -188,7 +193,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		
 		
 		for (WebElement element : inputElements) {
-		    System.out.println("Caixa Texto ou Botão :" + extractedAttribute(element));
+		    log.write("Caixa Texto ou Botão :" + extractedAttribute(element));
 		    cont++;
 		    String atributo = extractedAttribute(element);
 		    if(atributo.contains("login"))
@@ -211,7 +216,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		
 		
 		for (WebElement element : imgElements) {
-		    System.out.println("Imagem ou Imagem que se passa por Botão :" + extractedAttribute(element));
+		    log.write("Imagem ou Imagem que se passa por Botão :" + extractedAttribute(element));
 		    cont++;
 		}
 		
@@ -219,7 +224,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 	}
 
     private void notFound(String label) {
-        System.out.println("Element not found: " + label);
+        log.write("Element not found: " + label);
     }
 
     public static void main(String[] args) {

@@ -19,11 +19,9 @@ public class ReadTextFile {
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
 		        lista.add(data);
-		        System.out.println(data);
 		      }
 		      myReader.close();
 		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
 			
