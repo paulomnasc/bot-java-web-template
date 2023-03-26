@@ -39,7 +39,7 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
             // Uncomment to set the WebDriver path
             //setDriverPath("C://");
-            int contInputs, contSelects, contLabels, contImages,  contTotal;
+            int contInputs, contSelects, contLabels, contImages, contAcoes, contTotal;
             contSelects = 0;
             String fileName = "D:\\Users\\cblna\\Documents\\Paulo\\github\\urls.txt";
             
@@ -71,7 +71,10 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 	                log.write("Total de Listas Suspensas: " + contSelects);
 	                
 	                contImages = listImages();
-	                log.write("Total de Iamgens ou Botões Clicáveis: " + contImages);
+	                log.write("Total de Iamgens Clicáveis: " + contImages);
+	                
+	                contAcoes = listActions();
+	                log.write("Total de Ações Clicáveis: " + contAcoes);
 
 	                
 	        		
@@ -97,6 +100,23 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
             
         }
     }
+    
+    private int listActions() {
+		int contTotal;
+		//Obtendo ações 
+		int cont;
+		cont = 0;
+		
+		String expression = "//button[@class='iPhanbutton']";
+		List<WebElement> lista =this.findElements(By.xpath(expression));
+		//List<WebElement> lista =this.findElements(By.tagName("button"));
+		for (WebElement element : lista) {
+			log.write("Ações :  :" + extractedAttribute(element));
+		    cont++;
+		}
+		contTotal = cont;
+		return contTotal;
+	}
 
 	private int listLabels() {
 		int contTotal;

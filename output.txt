@@ -8,7 +8,8 @@ Caixa Texto ou Botão :usuario.dadosUsuario.senha
 Total de Inputs: 2
 Total de Rótulos: 0
 Total de Listas Suspensas: 0
-Total de Iamgens ou Botões Clicáveis: 0
+Total de Iamgens Clicáveis: 0
+Total de Ações Clicáveis: 0
 ***************************************************************************
 End execute url : https://sicg.homologacao.iphan.gov.br/sicg/login
 ***************************************************************************
@@ -50,7 +51,12 @@ Listas suspensas:uf
 Listas suspensas:municipio
 Listas suspensas:pesquisa.idTipoLogradouro
 Total de Listas Suspensas: 8
-Total de Iamgens ou Botões Clicáveis: 0
+Total de Iamgens Clicáveis: 0
+Ações :  :Adicionar
+Ações :  :action
+Ações :  :Nova Pesquisa
+Ações :  :Pesquisa
+Total de Ações Clicáveis: 4
 ***************************************************************************
 End execute url : https://sicg.homologacao.iphan.gov.br/sicg/pesquisaAvancadaBem
 ***************************************************************************
