@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -34,8 +35,8 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
             // Uncomment to set the WebDriver path
             //setDriverPath("C://");
-            int contInputs, contSelects, contLabels, contTotal;
-            
+            int contInputs, contSelects, contLabels, contImages,  contTotal;
+            contSelects = 0;
             String fileName = "D:\\Users\\cblna\\Documents\\Paulo\\github\\urls.txt";
             
             ReadTextFile reader = new ReadTextFile();
@@ -52,19 +53,28 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 	            	navigateTo(url);
 	            	
 	            	
-	                
-	                System.out.println("Processando a página");
+	            	System.out.println("***************************************************************************");
+	                System.out.println("Processando a página " + url);
+	                System.out.println("***************************************************************************");
 	                
 	                contInputs = listInputs();
-	                
-	                contSelects = listSelects();
+	                System.out.println("Total de Inputs: " + contInputs);
 	                
 	                contLabels = listLabels();
+	                System.out.println("Total de Rótulos: " + contLabels);
 	                
-	                contTotal = contInputs+ contLabels+ contSelects;
+	                contSelects = listSelects();
+	                System.out.println("Total de Listas Suspensas: " + contSelects);
 	                
+	                contImages = listImages();
+	                System.out.println("Total de Iamgens ou Botões Clicáveis: " + contImages);
+
+	                
+	        		
+	                System.out.println("***************************************************************************");
 	                System.out.println("End execute url : " + url);
-	                System.out.println("Total de elementos encontrados : " + contTotal);
+	                System.out.println("***************************************************************************");
+	                
 	                
             	}
             	
@@ -83,12 +93,50 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
         }
     }
 
+	private int listLabels() {
+		int contTotal;
+		//Obtendo as rótulos
+		int cont;
+		cont = 0;
+		
+		String expression = "//fieldset//fieldset//label[contains(text(), ':')]";
+		//String expression = "//fieldset//fieldset//span//label[contains(text(), ':')]";
+		List<WebElement> labelEements =this.findElements(By.xpath(expression));
+			        		
+		for (WebElement element : labelEements) {
+			System.out.println("Rótulo:  :" + extractedAttribute(element));
+			
+		    cont++;
+		}
+		contTotal = cont;
+		return contTotal;
+	}
+
     
+    private int listImages() {
+		int cont;
+		cont = 0;
+		
+		List<WebElement> imageElements = this.findElements(By.tagName("img"));
+		
+		for (WebElement element : imageElements) {
+			System.out.println("Lista rótulos :" + extractedAttribute(element));
+		    cont++;
+		}
+		
+		
+		return cont;
+	}
+    
+    /*
     private int listLabels() {
 		int cont;
 		cont = 0;
 		
-		List<WebElement> labelElements = this.findElements(By.tagName("label"));
+		//Para este caso vamos primeiro recuperar o elemento que agrupa os labels
+		WebElement elementContainer = this.findElement(By.tagName("span"));
+		
+		List<WebElement> labelElements = elementContainer.findElements(By.tagName("label"));
 		
 		for (WebElement element : labelElements) {
 			System.out.println("Lista rótulos :" + extractedAttribute(element));
@@ -104,10 +152,16 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		
 		return cont;
 	}
-
+	*/
 	private String extractedAttribute(WebElement element) {
 		
-		if(element.getAttribute("name")==null) return element.getAttribute("id");
+		if(element.getAttribute("name")==null || element.getAttribute("name").isEmpty())
+		{
+			if(!element.getAttribute("id").isEmpty())
+				return element.getAttribute("id");
+			else
+				return element.getText();
+		}
 		
 		if(element.getAttribute("name").isBlank()) return element.getTagName();
 		//if(element.getAttribute("name").isBlank()) return element.getAttribute("id");
@@ -130,8 +184,8 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 
 	private int listInputs() {
 		int cont = 0;
-		//List<WebElement> elements = this.findElements(By.tagName("input"));
 		List<WebElement> inputElements = this.findElements(By.tagName("input"));
+		
 		
 		for (WebElement element : inputElements) {
 		    System.out.println("Caixa Texto ou Botão :" + extractedAttribute(element));
@@ -150,6 +204,15 @@ public class FirstBotWeb extends WebBot implements RunnableAgent {
 		    	
 		    }
 		    
+		}
+		
+		
+		List<WebElement> imgElements = this.findElements(By.tagName("img"));
+		
+		
+		for (WebElement element : imgElements) {
+		    System.out.println("Imagem ou Imagem que se passa por Botão :" + extractedAttribute(element));
+		    cont++;
 		}
 		
 		return cont;
